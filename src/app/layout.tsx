@@ -1,21 +1,24 @@
-'use client'
+"use client"
 
 import Header from "@/components/Header"
 import "./globals.css"
 import { Inter } from "next/font/google"
 import { MoralisProvider } from "react-moralis"
+import { NotificationProvider } from "web3uikit"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <MoralisProvider initializeOnMount={false}>
-          <html lang="en">
+        <html lang="en">
             <body className={inter.className}>
-              <Header />
-              {children}
-              </body>
+                <MoralisProvider initializeOnMount={false}>
+                    <NotificationProvider>
+                        <Header />
+                        {children}
+                    </NotificationProvider>
+                </MoralisProvider>
+            </body>
         </html>
-        </MoralisProvider>
     )
 }
